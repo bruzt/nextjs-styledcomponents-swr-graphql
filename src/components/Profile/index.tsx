@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
+import Loader from 'react-loader-spinner';
 
 import api from '../../services/api';
 
@@ -47,7 +48,16 @@ const Profile: React.FC = () => {
 
     } else if(!data) {
 
-        return <Container>Loading</Container>
+        return (
+            <Container>
+                <Loader
+                    type="TailSpin"
+                    color="#f2a365"
+                    height={150}
+                    width={150}
+                />
+            </Container>
+        );
 
     } else {
 

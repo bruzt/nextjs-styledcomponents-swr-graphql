@@ -208,8 +208,8 @@ const Login: React.FC = () => {
                         onClick={() => setLostPassword(!getLostPassword)}
                     >
                         {(getLostPassword)
-                            ? 'Esqueci a senha'
-                            : 'Já tenho conta'
+                            ? 'Já tenho conta'
+                            : 'Esqueci a senha'
                         }
                     </span>
                 </footer>
