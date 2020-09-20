@@ -12,8 +12,8 @@ dotenv.config({
 
 /////////////////////////////
 
-module.exports = withImages(/*{
+module.exports = withImages({
     env: {
         BACKEND_URL: process.env.BACKEND_URL
     }
-}*/);
+});
