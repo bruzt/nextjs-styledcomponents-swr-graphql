@@ -79,7 +79,7 @@ const Login: React.FC = () => {
             session(response.data.data.session.token);
             
         } catch (error) {
-            console.log(...error);
+            console.log(error);
             alert('Erro ao cadastrar usuário');
         }
     }
