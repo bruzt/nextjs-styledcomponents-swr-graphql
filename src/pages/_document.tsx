@@ -7,7 +7,7 @@ import Document, {
     Main,
     NextScript
 } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
 
@@ -46,7 +46,7 @@ export default class MyDocument extends Document {
                 <Head>
                     <meta charSet="utf-8" />
                 </Head>
-                <body>
+                <body id='root'>
                     <Main />
                     <NextScript />
                 </body>

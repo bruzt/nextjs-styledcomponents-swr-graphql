@@ -1,4 +1,3 @@
-const withImages = require('next-images');
 const dotenv = require('dotenv');
 
 let env;
@@ -12,9 +11,8 @@ dotenv.config({
 
 /////////////////////////////
 
-module.exports = withImages({
-    target: "serverless",
+module.exports = {
     env: {
         BACKEND_URL: process.env.BACKEND_URL
     }
-});
+};
