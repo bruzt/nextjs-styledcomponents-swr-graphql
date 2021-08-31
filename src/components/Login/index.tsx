@@ -53,7 +53,7 @@ const Login: React.FC = () => {
 
         try {
 
-            const response = await api.post('/', {
+            const response = await api.post('/graphql', {
                 query: `
                     mutation {
                         storeUser(
@@ -72,11 +72,11 @@ const Login: React.FC = () => {
                         }
                     }
                 `
-            });
+            }).then(res => res.data);
 
             alert('Conta criada com sucesso');
 
-            session(response.data.data.session.token);
+            session(response.data.session.token);
             
         } catch (error) {
             console.log(error);
@@ -88,7 +88,7 @@ const Login: React.FC = () => {
 
         try {
 
-            const response = await api.post('/', {
+            const response = await api.post('/graphql', {
                 query: `
                     mutation {
                         session(
@@ -99,16 +99,16 @@ const Login: React.FC = () => {
                         }
                     }
                 `
-            });
+            }).then(res => res.data);
 
-            if(response.data.errors && response.data.errors.length > 0){
+            if(response.errors && response.errors.length > 0){
 
                 alert('Usuário e/ou senha incorretos');
                 setPassword('');
                 return;
             }
 
-            session(response.data.data.session.token);
+            session(response.data.session.token);
             
         } catch (error) {
             console.log(error);

@@ -1,35 +1,28 @@
 import React from 'react';
 import Link from 'next/link';
-import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import Loader from 'react-loader-spinner';
 
-import api from '../../services/api';
+import { useSwrGraphQl } from '../../services/swrGraphQl';
 
 import { Container } from './styles';
 
 interface IUser {
     data: {
-        data: {
-            showUser: {
-                id: number;
-                name: string;
-                email: string;
-            }
+        showUser: {
+            id: number;
+            name: string;
+            email: string;
         }
-        errors?: []
     }
+    errors?: []
 }
 
 const Profile: React.FC = () => {
 
     const router = useRouter();
 
-    const fetcher = (query: string) => api.post('/', {
-        query
-    });
-
-    const { error, data } = useSWR<IUser>(`
+    const { data, error } = useSwrGraphQl<IUser>(`
         query {
             showUser {
                 id
@@ -37,16 +30,16 @@ const Profile: React.FC = () => {
                 email
             }
         }
-    `, fetcher);
+    `);
 
-    if(error || (data && data.data.errors)){
+    if (error || (data && data.errors)) {
 
-        console.log('error: ', error);
-        console.log('errors: ', data.data.errors);
+        console.error('error: ', error);
+        console.log('errors: ', data.errors);
         alert('Erro ao busca usuário');
         router.back();
 
-    } else if(!data) {
+    } else if (!data) {
 
         return (
             <Container>
@@ -61,11 +54,11 @@ const Profile: React.FC = () => {
 
     } else {
 
-        const user = data.data.data.showUser;
+        const user = data.data.showUser;
 
         return (
             <Container>
-                
+
                 <div className="user">
                     <span className='id'>ID: {user.id}</span>
                     <span className='name'>Nome: {user.name}</span>
@@ -77,7 +70,7 @@ const Profile: React.FC = () => {
                         Endereço
                     </a>
                 </Link>
-    
+
             </Container>
         );
     }
